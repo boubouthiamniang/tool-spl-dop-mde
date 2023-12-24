@@ -1,5 +1,5 @@
 Class {
-	#name : #CCVarAactiveMQConfig,
+	#name : #CCVarAActiveMQConfig,
 	#superclass : #CCVarABrokerConfig,
 	#instVars : [
 		'#activeMQSpecAttribut => FMProperty'
@@ -8,16 +8,16 @@ Class {
 }
 
 { #category : #meta }
-CCVarAactiveMQConfig class >> annotation [
+CCVarAActiveMQConfig class >> annotation [
 
-	<FMClass: #activeMQConfig super: #CCVarABrokerConfig>
+	<FMClass: #ActiveMQConfig super: #CCVarABrokerConfig>
 	<package: #'Connector-ModelVarA'>
 	<generated>
 	^ self
 ]
 
 { #category : #accessing }
-CCVarAactiveMQConfig >> activeMQSpecAttribut [
+CCVarAActiveMQConfig >> activeMQSpecAttribut [
 
 	<FMProperty: #activeMQSpecAttribut type: #String>
 	<generated>
@@ -25,7 +25,7 @@ CCVarAactiveMQConfig >> activeMQSpecAttribut [
 ]
 
 { #category : #accessing }
-CCVarAactiveMQConfig >> activeMQSpecAttribut: anObject [
+CCVarAActiveMQConfig >> activeMQSpecAttribut: anObject [
 	<generated>
 	activeMQSpecAttribut := anObject
 ]

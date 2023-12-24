@@ -8,7 +8,7 @@ Class {
 CCEntity class >> annotation [
 
 	<FMClass: #Entity super: #MooseEntity>
-	<package: #'Connector-Model'>
+	<package: #'Connector-ModelVarA'>
 	<generated>
 	<abstract>
 	^ self

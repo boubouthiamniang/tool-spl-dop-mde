@@ -11,7 +11,7 @@ Class {
 CCRabbitMQConfig class >> annotation [
 
 	<FMClass: #RabbitMQConfig super: #CCBrokerConfig>
-	<package: #'Connector-Model'>
+	<package: #'Connector-ModelVarA'>
 	<generated>
 	^ self
 ]

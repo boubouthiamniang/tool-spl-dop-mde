@@ -15,7 +15,7 @@ Class {
 CCBrokerConfig class >> annotation [
 
 	<FMClass: #BrokerConfig super: #CCEntity>
-	<package: #'Connector-Model'>
+	<package: #'Connector-ModelVarA'>
 	<generated>
 	^ self
 ]

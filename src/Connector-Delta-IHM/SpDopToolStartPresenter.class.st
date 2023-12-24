@@ -47,16 +47,18 @@ SpDopToolStartPresenter >> start [
 { #category : #initialization }
 SpDopToolStartPresenter >> subMenu [
 	^ self newMenu
+	   	addItem: [ :item | 
+			item
+				name: 'New delta project';
+				icon: (self iconNamed: #add);
+				action: [ SpCreateDeltaProjectPresenter new start ] ];
+			
 		addItem: [ :item | 
 			item
 				name: 'Create a delta module';
 				icon: (self iconNamed: #add);
 				action: [ SpCreateDeltaModulePresenter new start ] ];
-		addItem: [ :item | 
-			item
-				name: 'Update a delta module';
-				icon: (self iconNamed: #smallUpdate);
-				action: [ SpUpdateDeltaModulePresenter new start ] ];
+
 		addItem: [ :item | 
 			item
 				name: 'Apply a delta module';
@@ -65,9 +67,29 @@ SpDopToolStartPresenter >> subMenu [
 			
 		addItem: [ :item | 
 			item
+				name: 'Update a delta module';
+				icon: (self iconNamed: #smallUpdate);
+				action: [ SpUpdateDeltaModulePresenter new start ] ];
+			
+		addItem: [ :item | 
+			item
+				name: 'Generate model fro metamodel';
+				icon: (self iconNamed: #add);
+				action: [ SpModelGeneratorPresenter new start ] ];
+
+			
+		addItem: [ :item | 
+			item
+				name: 'Generate code from model';
+				icon: (self iconNamed: #add);
+				action: [ SpModelToCodePresenter new start ] ];
+			
+		addItem: [ :item | 
+			item
 				name: 'Cancel';
 				icon: (self iconNamed: #back);
 				action: [ self inform: 'Cancelled back to main menu' ] ];
+			
 		yourself
 ]
 

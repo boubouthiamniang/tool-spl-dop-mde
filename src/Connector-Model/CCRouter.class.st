@@ -11,7 +11,7 @@ Class {
 CCRouter class >> annotation [
 
 	<FMClass: #Router super: #CCEntity>
-	<package: #'Connector-Model'>
+	<package: #'Connector-ModelVarA'>
 	<generated>
 	^ self
 ]

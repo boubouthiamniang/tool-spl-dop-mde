@@ -15,7 +15,7 @@ Class {
 CCConnector class >> annotation [
 
 	<FMClass: #Connector super: #CCEntity>
-	<package: #'Connector-Model'>
+	<package: #'Connector-ModelVarA'>
 	<generated>
 	^ self
 ]

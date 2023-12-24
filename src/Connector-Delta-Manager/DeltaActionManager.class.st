@@ -6,6 +6,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 DeltaActionManager >> modifyGeneratorClassSideForDelta: class sourceNameDico:sourceNameDico varianteSufixe:varianteSufixe [
+
 	#('packageName' 'prefix') do:[:each |
 		| deltaActionManager sourceName |
 		deltaActionManager := DeltaActionManager new.
@@ -21,7 +22,7 @@ DeltaActionManager >> modifyGeneratorClassSideForDelta: class sourceNameDico:sou
 DeltaActionManager >> modifyGeneratorClassSideMethods: class methodName: methodName sourceName:sourceName varianteSufixe:varianteSufixe [
 
 	| methodSelector lines linesEnd modifiedMethod |
-	
+
 	methodSelector := methodName asSymbol.
 
 	modifiedMethod := class classSide compiledMethodAt: methodSelector ifAbsent: [^self].
@@ -29,27 +30,30 @@ DeltaActionManager >> modifyGeneratorClassSideMethods: class methodName: methodN
 
 	lines:= modifiedMethod sourceCode lines asStringWithCr.
 	linesEnd:=lines copyReplaceAll: sourceName with: sourceName, varianteSufixe.
-
 	class classSide compile: linesEnd.
 ]
 
 { #category : #'as yet unclassified' }
-DeltaActionManager >> modifyGeneratorInstanceSideForDelta: className entityName:entityName [
+DeltaActionManager >> modifyGeneratorInstanceSideForDelta: className entitiesOperationsLink:entitiesOperationsLink [
+   "1 halt."
 	#('defineClasses' 'defineHierarchy' 'defineProperties' 'defineRelations') do:[:each | 
 		| deltaActionManager |
 		deltaActionManager := DeltaActionManager new.
-		deltaActionManager		modifyGeneratorInstanceSideMethods:  className methodName: each  entityName: entityName].
+		deltaActionManager	modifyGeneratorInstanceSideMethods:  className methodName: each  entitiesOperationsLink: entitiesOperationsLink].
 ]
 
 { #category : #'as yet unclassified' }
-DeltaActionManager >> modifyGeneratorInstanceSideMethods: class methodName: methodName entityName:entityName [
+DeltaActionManager >> modifyGeneratorInstanceSideMethods: class methodName: methodName entitiesOperationsLink:entitiesOperationsLink [
 
 	|classCompiledMethod lines linesEnd| 
-
+   "1 halt."
 	classCompiledMethod := (Smalltalk classNamed: class name) compiledMethodAt: methodName asSymbol.
 	lines := classCompiledMethod sourceCode lines.
-	linesEnd:=lines reject:[:l | l includesSubstring: entityName caseSensitive: false].
-
+	
+	((entitiesOperationsLink at:'operation') equalsTo: 'REMOVE') ifTrue: [ 
+		linesEnd:=lines reject:[:l | l includesSubstring: (entitiesOperationsLink at:'name_entity') caseSensitive: false].
+		 ] ifFalse: [ linesEnd:=lines].
+	
 	"Normally this method replace the methods defineClasses but i use a same name for instance 
 	but it is note a method of super class so can not generate "
 	class compile: linesEnd asStringWithCr. 

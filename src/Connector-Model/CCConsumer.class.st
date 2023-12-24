@@ -12,7 +12,7 @@ Class {
 CCConsumer class >> annotation [
 
 	<FMClass: #Consumer super: #CCEntity>
-	<package: #'Connector-Model'>
+	<package: #'Connector-ModelVarA'>
 	<generated>
 	^ self
 ]

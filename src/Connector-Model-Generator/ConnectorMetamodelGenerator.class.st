@@ -53,7 +53,7 @@ ConnectorMetamodelGenerator >> defineClasses [
     brokerConfig := builder newClassNamed: #BrokerConfig.
     rabbitMQConfig := builder newClassNamed: #RabbitMQConfig.
 	 kafkaConfig := builder newClassNamed: #KafkaConfig.
-	 activeMQConfig := builder newClassNamed: #activeMQConfig.
+	 activeMQConfig := builder newClassNamed: #ActiveMQConfig.
 	
     queue := builder newClassNamed: #Queue.
     exchange := builder newClassNamed: #Exchange.

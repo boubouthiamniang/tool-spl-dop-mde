@@ -12,7 +12,7 @@ Class {
 CCExchange class >> annotation [
 
 	<FMClass: #Exchange super: #CCEntity>
-	<package: #'Connector-Model'>
+	<package: #'Connector-ModelVarA'>
 	<generated>
 	^ self
 ]

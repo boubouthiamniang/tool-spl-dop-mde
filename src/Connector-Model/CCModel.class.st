@@ -7,6 +7,6 @@ Class {
 { #category : #meta }
 CCModel class >> annotation [
 	<FMClass: #CCModel super: #MooseModel>
-	<package: #'Connector-Model'>
+	<package: #'Connector-ModelVarA'>
 	<generated>
 ]

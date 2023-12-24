@@ -2,14 +2,14 @@ Class {
 	#name : #SpCreateDeltaModulePresenter,
 	#superclass : #SpPresenter,
 	#instVars : [
-		'fieldGenerator',
-		'fieldEntity',
-		'fieldPackage',
-		'fieldPrefix',
-		'fieldOperation',
-		'fieldSuffix',
+		'fieldDbName',
+		'fieldDeltaName',
+		'fieldApplyCondition',
+		'fieldPredecessors',
+		'fieldIdDeltaCore',
 		'buttonSaveDelta',
-		'fieldDeltaName'
+		'fieldAddonEntities',
+		'fieldRemovableEntities'
 	],
 	#classInstVars : [
 		'anObject'
@@ -32,167 +32,231 @@ SpCreateDeltaModulePresenter >> buttonSaveDelta: anObject [
 { #category : #layout }
 SpCreateDeltaModulePresenter >> defaultLayout [
 	^ SpGridLayout new
-		  add: 'Delta name' at: 1 @ 1;
-		  add: fieldDeltaName at: 2 @ 1 span: 2 @ 1;
-		  add: 'Generator:' at: 1 @ 2;
-		  add: fieldGenerator at: 2 @ 2 span: 2 @ 1;
-		  add: 'Entity' at: 1 @ 3;
-		  add: fieldEntity at: 2 @ 3 span: 2 @ 1;
-		  add: 'Package' at: 1 @ 4;
-		  add: fieldPackage at: 2 @ 4 span: 2 @ 1;
-		  add: 'Prefix' at: 1 @ 5;
-		  add: fieldPrefix at: 2 @ 5 span: 2 @ 1;
-		  add: 'Operation' at: 1 @ 6;
-		  add: fieldOperation at: 2 @ 6 span: 2 @ 1;
-		  add: 'Suffix:' at: 1 @ 7;
-		  add: fieldSuffix at: 2 @ 7 span: 2 @ 1;
+		  add: 'Delta db name' at: 1 @ 1;
+		  add: fieldDbName at: 2 @ 1 span: 2 @ 1;
+		  add: 'Delta name' at: 1 @ 2;
+		  add: fieldDeltaName at: 2 @ 2 span: 2 @ 1;
+		  add: 'Application condition' at: 1 @ 3;
+		  add: fieldApplyCondition at: 2 @ 3 span: 2 @ 1;
+		  add: 'Predecessors' at: 1 @ 4;
+		  add: fieldPredecessors at: 2 @ 4 span: 2 @ 1;
+		  add: 'Id delta core' at: 1 @ 5;
+		  add: fieldIdDeltaCore at: 2 @ 5 span: 2 @ 1;
+		  add: 'Add-on entities' at: 1 @ 6;
+		  add: fieldAddonEntities at: 2 @ 6 span: 2 @ 1;
+		  add: 'Removable entities' at: 1 @ 7;
+		  add: fieldRemovableEntities at: 2 @ 7 span: 2 @ 1;
 		  add: buttonSaveDelta at: 1 @ 8;
 		  beColumnNotHomogeneous;
 		  yourself
 ]
 
 { #category : #accessing }
-SpCreateDeltaModulePresenter >> fieldEntity [
+SpCreateDeltaModulePresenter >> fieldAddonEntities [
 
-	^ fieldEntity
+	^ fieldAddonEntities
 ]
 
 { #category : #accessing }
-SpCreateDeltaModulePresenter >> fieldEntity: anObject [
+SpCreateDeltaModulePresenter >> fieldAddonEntities: anObject [
 
-	fieldEntity := anObject
+	fieldAddonEntities := anObject
 ]
 
 { #category : #accessing }
-SpCreateDeltaModulePresenter >> fieldGenerator [
+SpCreateDeltaModulePresenter >> fieldApplyCondition [
 
-	^ fieldGenerator
+	^ fieldApplyCondition
 ]
 
 { #category : #accessing }
-SpCreateDeltaModulePresenter >> fieldGenerator: anObject [
+SpCreateDeltaModulePresenter >> fieldApplyCondition: anObject [
 
-	fieldGenerator := anObject
+	fieldApplyCondition := anObject
 ]
 
 { #category : #accessing }
-SpCreateDeltaModulePresenter >> fieldOperation [
+SpCreateDeltaModulePresenter >> fieldDeltaName [ 
 
-	^ fieldOperation
+	^ fieldDeltaName
 ]
 
 { #category : #accessing }
-SpCreateDeltaModulePresenter >> fieldOperation: anObject [
+SpCreateDeltaModulePresenter >> fieldDeltaName: anObject [
 
-	fieldOperation := anObject
+	fieldDeltaName := anObject
 ]
 
 { #category : #accessing }
-SpCreateDeltaModulePresenter >> fieldPackage [
+SpCreateDeltaModulePresenter >> fieldIdDeltaCore [
 
-	^ fieldPackage
+	^ fieldIdDeltaCore
 ]
 
 { #category : #accessing }
-SpCreateDeltaModulePresenter >> fieldPackage: anObject [
+SpCreateDeltaModulePresenter >> fieldIdDeltaCore: anObject [
 
-	fieldPackage := anObject
+	fieldIdDeltaCore := anObject
 ]
 
 { #category : #accessing }
-SpCreateDeltaModulePresenter >> fieldPrefix [
+SpCreateDeltaModulePresenter >> fieldPredecessors [
 
-	^ fieldPrefix
+	^ fieldPredecessors
 ]
 
 { #category : #accessing }
-SpCreateDeltaModulePresenter >> fieldPrefix: anObject [
+SpCreateDeltaModulePresenter >> fieldPredecessors: anObject [
 
-	fieldPrefix := anObject
+	fieldPredecessors := anObject
 ]
 
 { #category : #accessing }
-SpCreateDeltaModulePresenter >> fieldSuffix [
+SpCreateDeltaModulePresenter >> fieldRemovableEntities [
 
-	^ fieldSuffix
+	^ fieldRemovableEntities
 ]
 
 { #category : #accessing }
-SpCreateDeltaModulePresenter >> fieldSuffix: anObject [
+SpCreateDeltaModulePresenter >> fieldRemovableEntities: anObject [
 
-	fieldSuffix := anObject
+	fieldRemovableEntities := anObject
 ]
 
 { #category : #initialization }
 SpCreateDeltaModulePresenter >> initializePresenters [
+	fieldDbName := self newTextInput
+		placeholder: 'Name of the delta database';
+		yourself.
+		
 	fieldDeltaName := self newTextInput
 		placeholder: 'Name of the delta module';
 		yourself.
 
-	fieldGenerator := self newTextInput
-		placeholder: 'Name of the generator model version to consider';
+	fieldApplyCondition := self newTextInput
+		placeholder: 'Config for deltamodule activation';
 		yourself.
 
-	fieldEntity:= self newTextInput
-		placeholder: 'Name of the concerned entity';
+	fieldPredecessors:= self newTextInput
+		placeholder: 'List of the predecessors delta module';
+		yourself.
+	
+	fieldAddonEntities:= self newTextInput
+		placeholder: 'List of entities to add';
+		yourself.
+		
+	fieldRemovableEntities:= self newTextInput
+		placeholder: 'List of entities to remove';
 		yourself.
 
-	fieldPackage := self newTextInput
-		placeholder: 'Package name of the considered generator model';
+	fieldIdDeltaCore := self newTextInput
+		placeholder: 'Identifier ofvthe deltacore';
 		yourself.
 
-	fieldPrefix := self newTextInput
-		placeholder: 'Prefix of the new model';
-		yourself.
-		
-	fieldOperation := self newTextInput
-		placeholder: 'Operation type';
-		yourself.
-		
-	fieldSuffix := self newTextInput
-		placeholder: 'Suffix for the new generator package name';
-		yourself.
-		
 	buttonSaveDelta := self newButton
       label: 'Save delta';
 	   color: Color gray;
-		action:  [ self saveDeltaModule: 'deltas.db']
+		action:  [ self saveDeltaModule]
       yourself.
-
 ]
 
 { #category : #'as yet unclassified' }
-SpCreateDeltaModulePresenter >> saveDeltaModule: deltaDb [
+SpCreateDeltaModulePresenter >> saveDeltaModule [
 
-	| connection name generator entity package prefix operation suffix |
-	"Field values"
+	| connection dbName name applyCondition predecessors idDeltaCore addonEntities removableEntities idDeltaModule tabAddonEntities tabRemovableEntities|
+	"Field values will become dto"
+	dbName := fieldDbName text.
 	name := fieldDeltaName text.
-	generator := fieldGenerator text.
-	entity := fieldEntity text.
-	package := fieldPackage text.
-	prefix := fieldPrefix text.
-	operation := fieldOperation text.
-	suffix := fieldSuffix text.
+	applyCondition := fieldApplyCondition text.
+	predecessors := fieldPredecessors text.
+	idDeltaCore := fieldIdDeltaCore text.
+	addonEntities := fieldAddonEntities text.
+	removableEntities := fieldRemovableEntities text.
 
 	"database"
 	connection := SQLite3Connection memory.
 	connection := SQLite3Connection on:
-		              (Smalltalk imageDirectory / deltaDb) fullName.
+		              (Smalltalk imageDirectory / dbName) fullName.
 
 	connection open.
 
 	connection
 		execute:
-		'INSERT INTO deltas(delta_name, generator, entity, package, prefix, operation, suffix) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7);'
+		'INSERT INTO delta_module(name, apply_condition, predecessors, id_delta_core, addon_entities, removable_entities) VALUES (?1, ?2, ?3, ?4, ?5, ?6);'
 		with: { 
 		      name.
-				generator.
-				entity.
-				package.
-				prefix.
-				operation.
-				suffix }.
+				applyCondition.
+				predecessors.
+				idDeltaCore.
+				addonEntities.
+				removableEntities
+				}.
 
+	"Create entity and delta link"
+	
+	idDeltaModule := ((connection execute: 'Select id from delta_module where name=?' with: {name}) next) at:'id'.
+   "Todo create function for the two case duplication"
+	tabAddonEntities := addonEntities splitOn: ','.
+	tabAddonEntities do: [ :each |
+		|entity|
+
+    entity := (connection execute: 'Select name_entity from entity where name_entity=?' with: {each}) next.
+    "if entity not alredy exist"
+	 entity ifNil: [ 
+		each ifNotEmpty: [  
+			connection
+				execute:
+					'INSERT INTO entity(name_entity) VALUES (?1);'	
+						with: { 
+		     					each
+								}.
+								]
+
+		].
+	   "Create link between delta module and entity"
+	each ifNotEmpty: [ 
+	   		connection
+				execute:
+					'INSERT INTO delta_entity_link(id_delta, name_entity, operation) VALUES (?1, ?2, ?3);'	
+						with: { 
+		     					idDeltaModule.
+								each.
+								'ADD'
+								}.
+								]
+].
+
+"Todo create function for the two case duplication"
+	tabRemovableEntities := removableEntities splitOn: ','.
+	tabRemovableEntities do: [ :each |
+		|entity|
+    entity := (connection execute: 'Select name_entity from entity where name_entity=?' with: {each}) next.
+    "if entity not alredy exist"
+	 entity ifNil:  [ 
+		each ifNotEmpty: [ 
+			connection
+				execute:
+					'INSERT INTO entity(name_entity) VALUES (?1);'	
+						with: { 
+		     					each
+								}.
+								]
+
+		].
+	
+	   "Create link between delta module and entity"
+	   each ifNotEmpty: [ 
+	  	 	connection
+				execute:
+					'INSERT INTO delta_entity_link(id_delta, name_entity, operation) VALUES (?1, ?2, ?3);'	
+						with: { 
+		     					idDeltaModule.
+								each.
+								'REMOVE'
+								}.
+								]
+].
+	
 	connection close.
 
 	self inform: 'Delta module ', name, ' succefully created'

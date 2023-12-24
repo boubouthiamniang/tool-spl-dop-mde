@@ -30,12 +30,14 @@ Class {
 
 { #category : #accessing }
 ConnectorMetamodelGeneratorVarA class >> packageName [
-    ^ #'Connector-ModelVarA'
+    ^ #'Connector-Model'
+
 ]
 
 { #category : #accessing }
 ConnectorMetamodelGeneratorVarA class >> prefix [
-    ^ #'CCVarA'
+    ^ #'CC'
+
 ]
 
 { #category : #definition }
@@ -50,11 +52,13 @@ ConnectorMetamodelGeneratorVarA >> defineClasses [
 
     brokerConfig := builder newClassNamed: #BrokerConfig.
     rabbitMQConfig := builder newClassNamed: #RabbitMQConfig.
-	 activeMQConfig := builder newClassNamed: #activeMQConfig.
+	 kafkaConfig := builder newClassNamed: #KafkaConfig.
+	 activeMQConfig := builder newClassNamed: #ActiveMQConfig.
 	
     queue := builder newClassNamed: #Queue.
     exchange := builder newClassNamed: #Exchange.
     binding := builder newClassNamed: #Binding
+
 
 ]
 
@@ -62,6 +66,7 @@ ConnectorMetamodelGeneratorVarA >> defineClasses [
 ConnectorMetamodelGeneratorVarA >> defineHierarchy [
     super defineHierarchy.
     rabbitMQConfig --|> brokerConfig.
+    kafkaConfig --|> brokerConfig.
     activeMQConfig --|> brokerConfig.
 ]
 
@@ -80,6 +85,7 @@ ConnectorMetamodelGeneratorVarA >> defineProperties [
 	 brokerConfig property: #exchange type: #String.
 	
 	 rabbitMQConfig property: #rabbitMQSpecAttribut type: #String.
+	 kafkaConfig property: #kafkaSpecAttibut type: #String.
 	 activeMQConfig property: #activeMQSpecAttribut type: #String.
 
     queue property: #queueName type: #String.
@@ -89,6 +95,7 @@ ConnectorMetamodelGeneratorVarA >> defineProperties [
     
     binding property: #routingkey type: #String.
 	
+
 ]
 
 { #category : #definition }
@@ -104,6 +111,7 @@ ConnectorMetamodelGeneratorVarA >> defineRelations [
 	
 	(binding property: #queue) - (queue property: #brokerConfig).
 	(binding property: #exchange) - (exchange property: #brokerConfig).
+
 
 
 ]
